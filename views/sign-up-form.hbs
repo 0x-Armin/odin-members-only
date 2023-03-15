@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Sign-up</title>
+  </head>
+  <body>
+    <h1>Sign up</h1>
+    <h3>Join the latest viral social sensation!</h3>
+    <form action="" method="POST">
+      <label>
+        First name:
+        {{#if user.first_name}}
+        <input type="text" name="firstName" value="{{user.first_name}}" />
+        {{else}}
+        <input type="text" name="firstName" />
+        {{/if}}
+      </label>
+      <label>
+        Last name:
+        {{#if user.last_name}}
+        <input type="text" name="lastName" value="{{user.last_name}}" />
+        {{else}}
+        <input type="text" name="lastName" />
+        {{/if}}
+      </label>
+      <label>
+        Email:
+        {{#if user.email}}
+        <input type="email" name="email" value="{{user.email}}" />
+        {{else}}
+        <input type="email" name="email" />
+        {{/if}}
+      </label>
+      <label>
+        Username:
+        {{#if user.username}}
+        <input type="text" name="username" value="{{user.username}}"/>
+        {{else}}
+        <input type="text" name="username" />
+        {{/if}}
+      </label>
+      <label>
+        Password:
+        <input type="password" name="password" />
+      </label>
+
+      <input type="submit" value="Sign up" />
+    </form>
+
+    {{#if errors}}
+    <ul>
+      {{#each errors}}
+      <li>{{this.msg}}</li>
+      {{/each}}
+    </ul>
+    {{/if}}
+  </body>
+</html>
