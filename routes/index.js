@@ -37,6 +37,13 @@ router.post("/sign-up", [
     .trim()
     .isLength({ min: 1 })
     .escape(),
+  body("passwordCfm")
+    .trim()
+    .isLength({ min: 1 })
+    .escape()
+    .custom((val, { req }) => val === req.body.password)
+    .withMessage("The passwords do not match"),
+
 
   async (req, res, next) => {
     const errors = validationResult(req);
