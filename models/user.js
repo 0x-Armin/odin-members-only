@@ -10,7 +10,7 @@ const UserSchema = new Schema({
   password: { type: String, required: true },
   membership_status: { 
     type: String,
-    enum: ['admin', 'normal', 'gold'],
+    enum: ['Admin', 'Normal', 'Insider'],
   },
 });
 

@@ -1,0 +1,18 @@
+<h1>Become an insider today</h1>
+<p>Ready to upgrade to become an insider? View the authors behind each and every message, so that you'll know who has a crush on you!</p>
+
+<form method="POST" action="">
+  <label>
+    Secret passcode:
+    <input type="password" name="passcode" />
+  </label>
+  <button>Upgrade</button>
+</form>
+
+{{#if errors}}
+<ul>
+  {{#each errors}}
+  <li>{{this.msg}}</li>
+  {{/each}}
+</ul>
+{{/if}}

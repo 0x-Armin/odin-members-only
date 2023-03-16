@@ -13,6 +13,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+const { handlebars } = require("hbs");
 
 // Set up mongoose connection
 const mongoose = require("mongoose");
@@ -30,6 +31,11 @@ app.set('view engine', 'hbs');
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(function(req, res, next) {
+  res.locals.currentUser = req.user;
+  next();
+});
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -54,6 +60,14 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+handlebars.registerHelper("ifInsider", function (arg1, options) {
+  return arg1 === "Insider" ? options.fn(this) : options.inverse(this);
+});
+
+handlebars.registerHelper("ifNormal", function (arg1, options) {
+  return arg1 === "Normal" ? options.fn(this) : options.inverse(this);
 });
 
 module.exports = app;

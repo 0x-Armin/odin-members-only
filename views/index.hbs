@@ -3,6 +3,10 @@
 
 {{#if user}}
   <h2>Welcome back {{user.first_name}}</h2>
+  <p>Membership tier: {{user.membership_status}}</p>
+  {{#ifNormal user.membership_status}}
+    <a href="/upgrade">Upgrade</a>
+  {{/ifNormal}}
   <a href="/log-out">Log out</a>
 {{else}}
 <h2>Please log in</h2>

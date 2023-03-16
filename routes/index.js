@@ -1,6 +1,8 @@
 var bcrypt = require("bcryptjs");
 const passport = require("passport");
 
+require("dotenv").config()
+
 var express = require("express");
 var router = express.Router();
 
@@ -58,6 +60,7 @@ router.post("/sign-up", [
             email: req.body.email,
             username: req.body.username,
             password: hash,
+            membership_status: "Normal",
           });
       
           // Errors in form field(s). Ask user to re-submit
@@ -97,5 +100,32 @@ router.get("/log-out", (req, res, next) => {
     res.redirect("/");
   });
 });
+
+router.get("/upgrade", (req, res, next) => {
+  res.render("upgrade-form");
+});
+
+router.post("/upgrade", [
+  body("passcode")
+  .exists({checkFalsy: true}).withMessage('You must type a passcode')
+  .custom(value => value === process.env.PASSCODE)
+  .withMessage("Incorrect passcode!"),
+
+  async (req, res, next) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      res.render("upgrade-form", {
+        errors: errors.array(),
+      });
+      return;
+    }
+
+    User.findByIdAndUpdate(res.locals.currentUser.id, { membership_status: 'Insider' })
+        .then(res.redirect("/"))
+        .catch(err => 
+          { return next(err) });
+  }
+])
 
 module.exports = router;
