@@ -1,2 +1,20 @@
 <h1>{{title}}</h1>
 <p>Welcome to {{title}}</p>
+
+{{#if user}}
+  <h2>Welcome back {{user.first_name}}</h2>
+  <a href="/log-out">Log out</a>
+{{else}}
+<h2>Please log in</h2>
+  <form action="/log-in" method="post">
+    <label>
+      Username:
+      <input name="username" type="text" />
+    </label>
+    <label>
+      Password:
+      <input name="password" type="password" />
+    </label>
+    <button>Log in</button>
+  </form>
+{{/if}}
