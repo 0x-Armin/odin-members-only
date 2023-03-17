@@ -1,4 +1,4 @@
-const { DateTime } = require('luxon');
+const { DateTime } = require("luxon");
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
@@ -10,8 +10,16 @@ const MessageSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: "User", required: true },
 });
 
-MessageSchema.virtual("display_date").get(function() {
+MessageSchema.virtual("url").get(function () {
+  return `/messages/${this._id}`;
+});
+
+MessageSchema.virtual("url_delete").get(function () {
+  return `/messages/${this._id}/delete`;
+});
+
+MessageSchema.virtual("display_date").get(function () {
   return DateTime.fromJSDate(this.timestamp).toLocaleString(DateTime.DATE_MED);
-})
+});
 
 module.exports = mongoose.model("Message", MessageSchema);

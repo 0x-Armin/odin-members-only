@@ -23,6 +23,10 @@
         <p>{{../user.full_name}}</p>
         <p>{{this.display_date}}</p>
         {{/ifInsider}}
+
+        {{#ifAdmin ../user.admin_status}}
+          <p><a href={{this.url_delete}}>Delete message</a></p>
+        {{/ifAdmin}}
       </li>
     </ul>
   {{/each}}
