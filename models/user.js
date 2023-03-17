@@ -10,11 +10,12 @@ const UserSchema = new Schema({
   password: { type: String, required: true },
   membership_status: { 
     type: String,
-    enum: ['Admin', 'Normal', 'Insider'],
+    enum: ['Normal', 'Insider'],
   },
+  admin_status: { type: Boolean, default: false },
 });
 
-UserSchema.virtual("name").get(function() {
+UserSchema.virtual("full_name").get(function() {
   let fullname = "";
   if (this.first_name && this.last_name) {
     fullname = `${this.last_name}, ${this.first_name}`;

@@ -1,0 +1,18 @@
+<h1>You're the Chosen One</h1>
+<p>Help us moderate Members Only to make it the best online space</p>
+
+<form method="POST" action="">
+  <label>
+    Secret passcode:
+    <input type="password" name="passcode" />
+  </label>
+  <button>Upgrade</button>
+</form>
+
+{{#if errors}}
+<ul>
+  {{#each errors}}
+  <li>{{this.msg}}</li>
+  {{/each}}
+</ul>
+{{/if}}
