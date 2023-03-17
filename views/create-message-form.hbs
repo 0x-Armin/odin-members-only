@@ -1,0 +1,23 @@
+<h1>Create message</h1>
+<h2>Shoutout your message to the world!</h2>
+<form method="post" action="">
+  <label>
+    Title
+    {{#if title}}
+      <input type="text" name="title" value="{{title}}" />
+    {{else}}
+      <input type="text" name="title">
+    {{/if}}
+  </label>
+  <label>
+    Message:
+    {{#if msgText}}
+      <textarea name="msgText" rows="4" cols="50" value="{{msgText}}">
+      </textarea> 
+    {{else}}
+      <textarea name="msgText" rows="4" cols="50">
+      </textarea> 
+    {{/if}}
+  </label>
+  <button>Create message</button>
+</form>

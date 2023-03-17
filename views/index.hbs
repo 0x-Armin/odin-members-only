@@ -7,7 +7,26 @@
   {{#ifNormal user.membership_status}}
     <a href="/upgrade">Upgrade</a>
   {{/ifNormal}}
+
+  {{#ifNotAdmin user.admin_status}}
+    <a href="/admin">Become admin</a>
+  {{/ifNotAdmin}}
+  <a href="/create-message">Create message</a>
   <a href="/log-out">Log out</a>
+
+  {{#each messages}}
+    <ul>
+      <li>
+        <h3>{{this.title}}</h3>
+        <p>{{this.text}}</p>
+        {{#ifInsider ../user.membership_status}}
+        <p>{{../user.full_name}}</p>
+        <p>{{this.display_date}}</p>
+        {{/ifInsider}}
+      </li>
+    </ul>
+  {{/each}}
+
 {{else}}
 <h2>Please log in</h2>
   <form action="/log-in" method="post">
